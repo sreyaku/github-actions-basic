@@ -19,6 +19,7 @@ jobs:
       # Add your build and test steps here
       # For example:
       - name: Build and Test
-        run: echo "push or PR on master branch"
+        run: |
+        echo push or PR on master branch
       
 

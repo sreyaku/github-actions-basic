@@ -20,6 +20,6 @@ jobs:
       # For example:
       - name: Build and Test
         run: |
-        echo push or PR on master branch
+        echo "push or PR on master branch"
       
 

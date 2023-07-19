@@ -1,24 +1,29 @@
-name: CI/CD Workflow
+name: Print Push/Pull Request Event
 
 on:
-  pull_request:
-    branches:
-      - master
   push:
-    branches:
-      - master
+  pull_request:
+  pull_request_target:
+  workflow_dispatch: # This allows manual triggering of the workflow
 
 jobs:
-  build:
+  print_event:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      # Add your build and test steps here
-      # For example:
-      - name: Build and Test
-        run: echo "push or PR on master branch"
-      
-
+      - name: Print event type
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "Push event happened"
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Pull request event happened"
+          elif [ "${{ github.event_name }}" == "pull_request_target" ]; then
+            echo "Pull request event for target repository happened"
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Manual workflow_dispatch event happened"
+          else
+            echo "Unknown event happened"
+          fi
